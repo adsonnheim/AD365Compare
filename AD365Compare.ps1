@@ -39,12 +39,12 @@ ForEach ($ADUser in $ADUsers) {
 
 ForEach ($Trimmed365User in $Trimmed365Users) {
     If (-not ($TrimmedADUsers -contains $Trimmed365User)) {
-        Write-Host $Trimmed365User "is present in 365 but inconsistent with Active Directory!" -BackgroundColor Green
+        Write-Host $Trimmed365User "is present in Microsoft 365 but inconsistent with Active Directory!" -BackgroundColor Green
     }
 }
 
 ForEach ($TrimmedADUser in $TrimmedADUsers) {
     If (-not ($Trimmed365Users -contains $TrimmedADUser)) {
-        Write-Host $TrimmedADUser "is present in Active Directory but inconsistent with 365!" -BackgroundColor DarkYellow
+        Write-Host $TrimmedADUser "is present in Active Directory but inconsistent with Microsoft 365!" -BackgroundColor DarkYellow
     }
 }
