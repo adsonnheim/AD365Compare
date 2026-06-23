@@ -18,7 +18,7 @@ ForEach ($Line in $EnvLines) {
     $Name, $Value = $TrimmedLine -split '=', 2
     $Env.Add($Name, $Value)
 }
-
+Disconnect-Graph
 Connect-MgGraph -Scopes "User.Read.All"
 
 $365Users = @(Get-MgUser -All | Select-Object -ExpandProperty DisplayName)
