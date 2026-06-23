@@ -6,6 +6,6 @@ How to use:
 - Create a copy of .env.example and rename it to .env.local
 - Fill out parameters in newly created .env.local file of where your users are located in your domain
     - 2.1. e.g., SEARCH_BASE=OU=users,DC=domain,DC=my
-- Run script
+- Run `AD#65Compare.ps1`
 - A window will open prompting you to login to your Microsoft account
 - View results in terminal
