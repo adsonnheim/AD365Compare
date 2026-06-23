@@ -19,6 +19,7 @@ ForEach ($Line in $EnvLines) {
     $Env.Add($Name, $Value)
 }
 
+Disconnect-MgGraph
 Connect-MgGraph -Scopes "User.Read.All"
 
 $365Users = @(Get-MgUser -All | Select-Object -ExpandProperty DisplayName)
@@ -29,8 +30,8 @@ ForEach ($365User in $365Users) {
     $Trimmed365Users += ($365User -replace '\s+', ' ').Trim()
 }
 
-$ADUsers = @(Get-ADUser -Filter * -SearchBase $Env["SEARCH_BASE"] | Where-Object {($_.Enabled -eq $true)} | Select-Object -ExpandProperty Name)
-
+$ADUsers = @(Get-ADUser -Filter {Enabled -eq $true} -SearchBase $Env["SEARCH_BASE"] | Select-Object -ExpandProperty Name)
+#Where-Object {$_.Enabled -eq $true} |
 $TrimmedADUsers = @()
 
 ForEach ($ADUser in $ADUsers) {
@@ -48,3 +49,5 @@ ForEach ($TrimmedADUser in $TrimmedADUsers) {
         Write-Host $TrimmedADUser "is present in Active Directory but not in 365!" -BackgroundColor DarkYellow
     }
 }
+
+#Mary Springer showing as not in Active Directory but user does appear to be there, though disabled
